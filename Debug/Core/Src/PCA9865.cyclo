@@ -1,0 +1,14 @@
+../Core/Src/PCA9865.c:22:6:ServoDriverInit	1
+../Core/Src/PCA9865.c:42:6:ServoDriverSetPWMFreq	5
+../Core/Src/PCA9865.c:85:6:ServoDriverReset	1
+../Core/Src/PCA9865.c:99:6:ServoDriverSleep	1
+../Core/Src/PCA9865.c:118:6:ServoDriverWakeup	1
+../Core/Src/PCA9865.c:137:9:ServoDriverReadPrescale	1
+../Core/Src/PCA9865.c:151:5:ServoDriverGetPWM	1
+../Core/Src/PCA9865.c:169:6:ServoDriverSetOnOff	1
+../Core/Src/PCA9865.c:195:6:ServoDriverSetOnOff_Multi	2
+../Core/Src/PCA9865.c:265:6:ServoDriverWriteMicroseconds	1
+../Core/Src/PCA9865.c:298:6:ServoDriverSetExtClk	1
+../Core/Src/PCA9865.c:326:6:ServoDriverSetOutputMode	2
+../Core/Src/PCA9865.c:339:6:I2CWriteReg8	1
+../Core/Src/PCA9865.c:348:9:I2CReadReg8	1

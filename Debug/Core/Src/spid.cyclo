@@ -1,0 +1,3 @@
+../Core/Src/spid.c:3:6:SPIDInit	1
+../Core/Src/spid.c:25:6:SPIDLoop	5
+../Core/Src/spid.c:56:6:SPIDReset	1

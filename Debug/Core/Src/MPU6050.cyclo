@@ -1,0 +1,4 @@
+../Core/Src/MPU6050.c:11:6:MPUInit	9
+../Core/Src/MPU6050.c:77:6:MPUSetOffsets	1
+../Core/Src/MPU6050.c:89:6:MPUReqAccGyro	1
+../Core/Src/MPU6050.c:116:6:CompPitchRoll	4
