@@ -79,9 +79,9 @@ float req_body_rotation[3] = {0.000,0.000,0.000};
 float pitch_error, pitch_output, pitch_sum;
 float roll_error, roll_output, roll_sum;
 
-float step_height = 0.07, step_length = 0.00025;
-float x_translation = 0.02, y_translation = 0.02;
-float body_height = 0.16;
+float step_height = 0.038, step_length = 0.00028;
+float x_translation = 0.01, y_translation = 0.021;
+float body_height = 0.165;
 float X_setpoint = 0.00, Y_setpoint = 0.00;
 char data[30];
 char num_conv[6];
@@ -184,7 +184,7 @@ void Mainfunc(void *argument)
 {
 	/* USER CODE BEGIN Mainfunc */
 	Rise();
-	mode = WALK;
+	mode = TROT;
 	HAL_UART_Init(&huart1);
 	HAL_UART_Receive_IT(&huart1, &rx, 1);
 	for(;;)
@@ -199,24 +199,15 @@ void Mainfunc(void *argument)
 				if(ticks > 5)
 					ticks = 0;
 			}else if (mode == WALK){
-				if(ticks > 11)
+				if(ticks > 10)
 					ticks = 0;
 			}
 		}else{
 			Stand();
 		}
 
-		if(mode == WALK && ticks > 0 && ticks < 7){
-			req_body_rotation[0] = (0.0025 * J2y) * 57.3248;
-			req_body_rotation[1] = (0.0025 * J2x) * 57.3248;
-		}else if(mode == WALK && ticks >= 7){
-			req_body_rotation[0] = (0.0025 * J2y) * 57.3248;
-			req_body_rotation[1] = (0.0025 * J2x) * 57.3248;
-		}else{
-			req_body_rotation[0] = (0.0025 * J2y) * 57.3248;
-			req_body_rotation[1] = (0.0025 * J2x) * 57.3248;
-		}
-
+		req_body_rotation[0] = (0.0025 * J2y) * 57.3248;
+		req_body_rotation[1] = (0.0025 * J2x) * 57.3248;
 
 		if(pressed_button == L1){
 			body_rotation[2] = -0.17;
@@ -232,27 +223,33 @@ void Mainfunc(void *argument)
 		//		}
 
 		if (pressed_button == B){
-
-
 			//		HAL_UART_Transmit_IT(&huart1, data, strlen(data));
 			while(pressed_button == B);
 			if(mode == TROT){
 				mode = WALK;
 				ticks=0;
-				step_height = 0.035;
-				step_length = 0.0001;
+				step_height = 0.038;
+				step_length = 0.00032;
 			}else if (mode == WALK){
 				mode = TROT;
-				step_height = 0.035;
+				step_height = 0.038;
 				ticks=0;
-				step_length = 0.00025;
+				step_length = 0.00028;
 			}
 
-			//			sprintf(data,"0 0 %d 0\r\n", mode);
-			//			HAL_UART_Transmit_IT(&huart1, data, strlen(data));
+			sprintf(data,"%d %d %s 0\r\n",(int)(-mpu6050.roll), (int)(mpu6050.pitch), mode? "Trot":"Walk");
+			HAL_UART_Transmit_IT(&huart1, data, strlen(data));
 		}
 
-		HAL_Delay(200);
+		if(ticks == 0 && ticks == 2 && ticks == 3 && ticks == 5 && mode == TROT){
+			HAL_Delay(150);
+		}else if (mode == TROT){
+			HAL_Delay(175);
+		}else{
+			HAL_Delay(250);
+		}
+
+
 
 
 		//		if(pressed_button == 'A'){
@@ -288,7 +285,6 @@ void Mainfunc(void *argument)
 		//		HAL_Delay(500);
 
 
-
 		// Jumping Code
 		//		FL_position[2] = 0.09;
 		//		HAL_Delay(500);
@@ -316,13 +312,13 @@ void CalcFunc(void *argument)
 	FL_offsets[2] = -0.26;
 	FR_offsets[0] = -0.09;
 	FR_offsets[1] = 0.02;
-	FR_offsets[2] = -0.23;
+	FR_offsets[2] = -0.26;
 	BL_offsets[0] = 0.09;
 	BL_offsets[1] = -0.08;
 	BL_offsets[2] = -0.04;
 	BR_offsets[0] = -0.01;
 	BR_offsets[1] = 0.15;
-	BR_offsets[2] = 0.38;
+	BR_offsets[2] = 0.39;
 	ServoDriverInit(&pca9865, &hi2c1, SERVO_DRIVER_ADDRESS);
 	HAL_Delay(300);
 	MPUInit(&mpu6050, &hi2c2, MPU6050_DataRate_2KHz, MPU6050_Accelerometer_2G, MPU6050_Gyroscope_250s, 0.005, 0.5);
@@ -369,7 +365,7 @@ void CalcFunc(void *argument)
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-//	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+	//	HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 
 	if(rx != '\n'){
 		data[rx_index] = rx;
@@ -407,17 +403,23 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 			if(data[1] == 'T'){
 				pressed_button = START;
 			}else if(data[1] == '1'){
-				num_conv[0] = data[2];
-				num_conv[1] = data[3];
-				num_conv[2] = data[4];
-				num_conv[3] = '0';
+
+				uint8_t joy_index = 2;
+				memset(num_conv,'_',6);
+				while( data[joy_index] != '\n'){
+					num_conv[joy_index] = data[joy_index];
+					joy_index+=1;
+				}
 				slider_speed = (uint8_t)(atoi(num_conv));
 
 			}else if(data[1] == '2'){
-				num_conv[0] = data[2];
-				num_conv[1] = data[3];
-				num_conv[2] = data[4];
-				num_conv[3] = '0';
+
+				uint8_t joy_index = 2;
+				memset(num_conv,'_',6);
+				while( data[joy_index] != '\n'){
+					num_conv[joy_index] = data[joy_index];
+					joy_index+=1;
+				}
 				slider_angle = (uint8_t)(atoi(num_conv));
 
 			}else{
@@ -672,77 +674,77 @@ void Gait_controller (uint8_t ticks, float x_setpoint, float y_setpoint){
 		switch(ticks){
 
 		case 0:
-			load_leg_position(FL_position,-2*x_setpoint,-2*y_setpoint - y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(FR_position,x_setpoint,y_setpoint - y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BL_position,-x_setpoint,-y_setpoint - y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BR_position,2*x_setpoint,2*y_setpoint - y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FL_position,x_setpoint - x_translation,y_setpoint + y_translation  ,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FR_position,-x_setpoint - x_translation,-y_setpoint + y_translation ,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BL_position,x_setpoint - x_translation,y_setpoint + y_translation ,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BR_position,-x_setpoint - x_translation,-y_setpoint + y_translation ,body_height - step_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
 			break;
 		case 1:
-			load_leg_position(FL_position,-x_setpoint,-y_setpoint + y_translation,body_height - step_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(FR_position,x_setpoint,y_setpoint + y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BL_position,-x_setpoint,-y_setpoint + y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BR_position,2*x_setpoint,2*y_setpoint + y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FL_position,0.0 - x_translation,0.0 + y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FR_position,-x_setpoint - x_translation,-y_setpoint + y_translation  ,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BL_position,0.0 - x_translation,0.0 + y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BR_position,x_setpoint - x_translation,y_setpoint + y_translation  ,body_height - step_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
 			break;
 		case 2:
-			load_leg_position(FL_position,x_setpoint,y_setpoint + y_translation,body_height - step_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(FR_position,-x_setpoint,-y_setpoint + y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BL_position,-2*x_setpoint,-2*y_setpoint + y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BR_position,x_setpoint,y_setpoint + y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FL_position,0.0 - x_translation,0.0 + y_translation ,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FR_position,-x_setpoint - x_translation,-y_setpoint + y_translation ,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BL_position,0.0 - x_translation,0.0 + y_translation ,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BR_position,x_setpoint - x_translation,y_setpoint + y_translation ,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
 			break;
 		case 3:
-			load_leg_position(FL_position,2*x_setpoint,2*y_setpoint + y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(FR_position,-x_setpoint,-y_setpoint + y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BL_position,-2*x_setpoint,-2*y_setpoint + y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BR_position,x_setpoint,y_setpoint + y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FL_position,0.0 - x_translation,0.0 + y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FR_position,-x_setpoint - x_translation,-y_setpoint + y_translation ,body_height - step_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BL_position,0.0 - x_translation,0.0 + y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BR_position,x_setpoint - x_translation,y_setpoint + y_translation ,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
 			break;
 		case 4:
-			load_leg_position(FL_position,2*x_setpoint,2*y_setpoint + y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(FR_position,-x_setpoint,-y_setpoint + y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BL_position,-x_setpoint,-y_setpoint + y_translation,body_height - step_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BR_position,x_setpoint,y_setpoint + y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FL_position,-x_setpoint - x_translation,-y_setpoint + y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FR_position,x_setpoint - x_translation,y_setpoint  + y_translation,body_height - step_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BL_position,-x_setpoint - x_translation,-y_setpoint + y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BR_position,x_setpoint - x_translation,y_setpoint  + y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
 			break;
 		case 5:
-			load_leg_position(FL_position,x_setpoint,y_setpoint + y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(FR_position,-2*x_setpoint,-2*y_setpoint + y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BL_position,x_setpoint,y_setpoint + y_translation,body_height - step_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BR_position,-x_setpoint,-y_setpoint + y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FL_position,-x_setpoint - x_translation,-y_setpoint - y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FR_position,x_setpoint - x_translation,y_setpoint  - y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BL_position,-x_setpoint - x_translation,-y_setpoint - y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BR_position,x_setpoint - x_translation,y_setpoint  - y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
 			break;
 		case 6:
-			load_leg_position(FL_position,x_setpoint,y_setpoint + y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(FR_position,-2*x_setpoint,-2*y_setpoint + y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BL_position,2*x_setpoint,2*y_setpoint + y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BR_position,-x_setpoint,-y_setpoint + y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FL_position,-x_setpoint - x_translation,-y_setpoint - y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FR_position,x_setpoint - x_translation,y_setpoint  - y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BL_position,-x_setpoint - x_translation,-y_setpoint - y_translation,body_height - step_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BR_position,x_setpoint - x_translation,y_setpoint  - y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
 			break;
 		case 7:
-			load_leg_position(FL_position,x_setpoint,y_setpoint - y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(FR_position,-x_setpoint,-y_setpoint - y_translation,body_height - step_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BL_position,2*x_setpoint,2*y_setpoint - y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BR_position,-x_setpoint,-y_setpoint - y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FL_position,-x_setpoint - x_translation,-y_setpoint - y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FR_position,0.0 - x_translation,0.0  - y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BL_position,x_setpoint - x_translation,y_setpoint- y_translation ,body_height - step_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BR_position,0.0 - x_translation,0.0 - y_translation ,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
 			break;
 		case 8:
-			load_leg_position(FL_position,-x_setpoint,-y_setpoint - y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(FR_position,x_setpoint,y_setpoint - y_translation,body_height - step_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BL_position,x_setpoint,y_setpoint - y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BR_position,-2*x_setpoint,-2*y_setpoint - y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
-			break;
-		case 9:
-			load_leg_position(FL_position,-x_setpoint,-y_setpoint - y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(FR_position,2*x_setpoint,2*y_setpoint - y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BL_position,x_setpoint,y_setpoint - y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BR_position,-2*x_setpoint,-2*y_setpoint - y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FL_position,-x_setpoint - x_translation,-y_setpoint- y_translation ,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FR_position,0.0 - x_translation,0.0 - y_translation ,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BL_position,x_setpoint - x_translation,y_setpoint - y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BR_position,0.0 - x_translation,0.0 - y_translation ,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
 			break;
 
+		case 9:
+			load_leg_position(FL_position,-x_setpoint - x_translation,-y_setpoint - y_translation,body_height - step_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FR_position,0.0 - x_translation,0.0 - y_translation ,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BL_position,x_setpoint - x_translation,y_setpoint- y_translation ,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BR_position,0.0 - x_translation,0.0 - y_translation ,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
+			break;
 		case 10:
-			load_leg_position(FL_position,-x_setpoint,-y_setpoint - y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(FR_position,2*x_setpoint,2*y_setpoint - y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BL_position,x_setpoint,y_setpoint - y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BR_position,-x_setpoint,-y_setpoint - y_translation,body_height - step_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FL_position,x_setpoint - x_translation,y_setpoint- y_translation ,body_height - step_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FR_position,-x_setpoint - x_translation,-y_setpoint - y_translation ,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BL_position,x_setpoint - x_translation,y_setpoint - y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BR_position,-x_setpoint- x_translation ,-y_setpoint - y_translation ,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
 			break;
 		case 11:
-			load_leg_position(FL_position,-2*x_setpoint,-2*y_setpoint - y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(FR_position,x_setpoint,y_setpoint - y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BL_position,-x_setpoint,-y_setpoint - y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
-			load_leg_position(BR_position,x_setpoint,y_setpoint - y_translation,body_height - step_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FL_position,x_setpoint - x_translation,y_setpoint + y_translation,body_height, FL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(FR_position,-x_setpoint - x_translation,-y_setpoint  + y_translation,body_height, FR_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BL_position,x_setpoint - x_translation,y_setpoint + y_translation,body_height, BL_body_angles, body_rotation[0], body_rotation[1], 0);
+			load_leg_position(BR_position,-x_setpoint - x_translation,-y_setpoint  + y_translation,body_height, BR_body_angles, body_rotation[0], body_rotation[1], 0);
 			break;
 		}
 
@@ -788,48 +790,48 @@ void Gait_controller (uint8_t ticks, float x_setpoint, float y_setpoint){
 		}
 
 	}
-//	else if (mode == GALLOP){
-//
-//		switch(ticks){
-//
-//		case 0:
-//			load_leg_position(FL_position,x_setpoint,y_setpoint,body_height-step_height, FL_body_angles, 0, 0, 0);
-//			load_leg_position(FR_position,-x_setpoint,-y_setpoint,body_height, FR_body_angles, 0, 0, 0);
-//			load_leg_position(BL_position,-x_setpoint,-y_setpoint,body_height, BL_body_angles, 0, 0, 0);
-//			load_leg_position(BR_position,x_setpoint,y_setpoint,body_height-step_height, BR_body_angles, 0, 0, 0);
-//			break;
-//		case 1:
-//			load_leg_position(FL_position,x_setpoint,y_setpoint,body_height, FL_body_angles, 0, 0, 0);
-//			load_leg_position(FR_position,-x_setpoint,-y_setpoint,body_height, FR_body_angles, 0, 0, 0);
-//			load_leg_position(BL_position,-x_setpoint,-y_setpoint,body_height, BL_body_angles, 0, 0, 0);
-//			load_leg_position(BR_position,x_setpoint,y_setpoint,body_height, BR_body_angles, 0, 0, 0);
-//			break;
-//		case 2:
-//			load_leg_position(FL_position,x_setpoint,y_setpoint,body_height, FL_body_angles, 0, 0, 0);
-//			load_leg_position(FR_position,-x_setpoint,-y_setpoint,body_height - step_height, FR_body_angles, 0, 0, 0);
-//			load_leg_position(BL_position,-x_setpoint,-y_setpoint,body_height - step_height, BL_body_angles, 0, 0, 0);
-//			load_leg_position(BR_position,x_setpoint,y_setpoint,body_height, BR_body_angles, 0, 0, 0);
-//			break;
-//		case 3:
-//			load_leg_position(FL_position,-x_setpoint,-y_setpoint,body_height, FL_body_angles, 0, 0, 0);
-//			load_leg_position(FR_position,x_setpoint,y_setpoint,body_height - step_height, FR_body_angles, 0, 0, 0);
-//			load_leg_position(BL_position,x_setpoint,y_setpoint,body_height - step_height, BL_body_angles, 0, 0, 0);
-//			load_leg_position(BR_position,-x_setpoint,-y_setpoint,body_height, BR_body_angles, 0, 0, 0);
-//			break;
-//		case 4:
-//			load_leg_position(FL_position,-x_setpoint,-y_setpoint,body_height, FL_body_angles, 0, 0, 0);
-//			load_leg_position(FR_position,x_setpoint,y_setpoint,body_height, FR_body_angles, 0, 0, 0);
-//			load_leg_position(BL_position,x_setpoint,y_setpoint,body_height, BL_body_angles, 0, 0, 0);
-//			load_leg_position(BR_position,-x_setpoint,-y_setpoint,body_height, BR_body_angles, 0, 0, 0);
-//			break;
-//		case 5:
-//			load_leg_position(FL_position,-x_setpoint,-y_setpoint,body_height - step_height, FL_body_angles, 0, 0, 0);
-//			load_leg_position(FR_position,x_setpoint,y_setpoint,body_height, FR_body_angles, 0, 0, 0);
-//			load_leg_position(BL_position,x_setpoint,y_setpoint,body_height, BL_body_angles, 0, 0, 0);
-//			load_leg_position(BR_position,-x_setpoint,-y_setpoint,body_height - step_height, BR_body_angles, 0, 0, 0);
-//			break;
-//		}
-//	}
+	//	else if (mode == GALLOP){
+	//
+	//		switch(ticks){
+	//
+	//		case 0:
+	//			load_leg_position(FL_position,x_setpoint,y_setpoint,body_height-step_height, FL_body_angles, 0, 0, 0);
+	//			load_leg_position(FR_position,-x_setpoint,-y_setpoint,body_height, FR_body_angles, 0, 0, 0);
+	//			load_leg_position(BL_position,-x_setpoint,-y_setpoint,body_height, BL_body_angles, 0, 0, 0);
+	//			load_leg_position(BR_position,x_setpoint,y_setpoint,body_height-step_height, BR_body_angles, 0, 0, 0);
+	//			break;
+	//		case 1:
+	//			load_leg_position(FL_position,x_setpoint,y_setpoint,body_height, FL_body_angles, 0, 0, 0);
+	//			load_leg_position(FR_position,-x_setpoint,-y_setpoint,body_height, FR_body_angles, 0, 0, 0);
+	//			load_leg_position(BL_position,-x_setpoint,-y_setpoint,body_height, BL_body_angles, 0, 0, 0);
+	//			load_leg_position(BR_position,x_setpoint,y_setpoint,body_height, BR_body_angles, 0, 0, 0);
+	//			break;
+	//		case 2:
+	//			load_leg_position(FL_position,x_setpoint,y_setpoint,body_height, FL_body_angles, 0, 0, 0);
+	//			load_leg_position(FR_position,-x_setpoint,-y_setpoint,body_height - step_height, FR_body_angles, 0, 0, 0);
+	//			load_leg_position(BL_position,-x_setpoint,-y_setpoint,body_height - step_height, BL_body_angles, 0, 0, 0);
+	//			load_leg_position(BR_position,x_setpoint,y_setpoint,body_height, BR_body_angles, 0, 0, 0);
+	//			break;
+	//		case 3:
+	//			load_leg_position(FL_position,-x_setpoint,-y_setpoint,body_height, FL_body_angles, 0, 0, 0);
+	//			load_leg_position(FR_position,x_setpoint,y_setpoint,body_height - step_height, FR_body_angles, 0, 0, 0);
+	//			load_leg_position(BL_position,x_setpoint,y_setpoint,body_height - step_height, BL_body_angles, 0, 0, 0);
+	//			load_leg_position(BR_position,-x_setpoint,-y_setpoint,body_height, BR_body_angles, 0, 0, 0);
+	//			break;
+	//		case 4:
+	//			load_leg_position(FL_position,-x_setpoint,-y_setpoint,body_height, FL_body_angles, 0, 0, 0);
+	//			load_leg_position(FR_position,x_setpoint,y_setpoint,body_height, FR_body_angles, 0, 0, 0);
+	//			load_leg_position(BL_position,x_setpoint,y_setpoint,body_height, BL_body_angles, 0, 0, 0);
+	//			load_leg_position(BR_position,-x_setpoint,-y_setpoint,body_height, BR_body_angles, 0, 0, 0);
+	//			break;
+	//		case 5:
+	//			load_leg_position(FL_position,-x_setpoint,-y_setpoint,body_height - step_height, FL_body_angles, 0, 0, 0);
+	//			load_leg_position(FR_position,x_setpoint,y_setpoint,body_height, FR_body_angles, 0, 0, 0);
+	//			load_leg_position(BL_position,x_setpoint,y_setpoint,body_height, BL_body_angles, 0, 0, 0);
+	//			load_leg_position(BR_position,-x_setpoint,-y_setpoint,body_height - step_height, BR_body_angles, 0, 0, 0);
+	//			break;
+	//		}
+	//	}
 
 }
 
