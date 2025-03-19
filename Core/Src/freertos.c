@@ -79,7 +79,7 @@ float req_body_rotation[3] = {0.000,0.000,0.000};
 float pitch_error, pitch_output, pitch_sum;
 float roll_error, roll_output, roll_sum;
 
-float step_height = 0.038, step_length = 0.00028;
+float step_height = 0.042, step_length = 0.00028;
 float x_translation = 0.01, y_translation = 0.021;
 float body_height = 0.165;
 float X_setpoint = 0.00, Y_setpoint = 0.00;
@@ -232,7 +232,7 @@ void Mainfunc(void *argument)
 				step_length = 0.00032;
 			}else if (mode == WALK){
 				mode = TROT;
-				step_height = 0.038;
+				step_height = 0.042;
 				ticks=0;
 				step_length = 0.00028;
 			}
@@ -242,26 +242,14 @@ void Mainfunc(void *argument)
 		}
 
 		if(ticks == 0 && ticks == 2 && ticks == 3 && ticks == 5 && mode == TROT){
-			HAL_Delay(150);
+			HAL_Delay(120);
 		}else if (mode == TROT){
 			HAL_Delay(175);
 		}else{
 			HAL_Delay(250);
 		}
 
-
-
-
-		//		if(pressed_button == 'A'){
-		//			while(pressed_button == 'A');
-		//			if (mode == TROT){
-		//				mode = WALK;
-		//
-		//			}else if (mode == WALK){
-		//				mode = TROT;
-		//			}
-		//		}
-
+		// Initilization for Servo Motors
 		//				FL_angles[0] = 1.57;
 		//				FL_angles[1] = 1.57;
 		//				FL_angles[2] = 1.57;
@@ -323,8 +311,8 @@ void CalcFunc(void *argument)
 	HAL_Delay(300);
 	MPUInit(&mpu6050, &hi2c2, MPU6050_DataRate_2KHz, MPU6050_Accelerometer_2G, MPU6050_Gyroscope_250s, 0.005, 0.5);
 	MPUSetOffsets(&mpu6050, -944, -600, -590, 1130, 16, 923);
-	SPIDInit(&pid_pitch, &pitch_error, &pitch_output, 0.01, 1.0, 0.3, 0.21, 0.01, 0.004, 1.0/30.0, 0.2);
-	SPIDInit(&pid_roll, &roll_error, &roll_output, 0.01, 1.0, 0.3, 0.21, 0.01, 0.004, 1.0/30.0, 0.2);
+	SPIDInit(&pid_pitch, &pitch_error, &pitch_output, 0.01, 1.0, 0.3, 0.21, 0.02, 0.004, 1.0/30.0, 0.2);
+	SPIDInit(&pid_roll, &roll_error, &roll_output, 0.01, 1.0, 0.3, 0.21, 0.02, 0.004, 1.0/30.0, 0.2);
 	//		HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 
 	/* Infinite loop */
@@ -848,8 +836,18 @@ int angle_to_pulse(float angle){
 /* USER CODE END Application */
 
 void Rise(){
+//
+//	float position = 0.02;
+//	for ( int j = 0; j < 100; j++){
+//		position -= 0.0003;
+//		FL_position[1] = position;
+//		FR_position[1] = position;
+//		BL_position[1] = position;
+//		BR_position[1] = position;
+//		HAL_Delay(1);
+//	}
 
-	float position = 0.03;
+	float position = 0.04;
 	for ( int j = 0; j < 100; j++){
 		position += 0.0013;
 		FL_position[2] = position;
