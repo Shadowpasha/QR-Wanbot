@@ -1,4 +1,4 @@
-# STM32 FreeRTOS Project
+# QR-Wanbot Project
 
 This project demonstrates the use of FreeRTOS on an STM32 microcontroller to manage two main tasks: `MainTask` and `CalcTask`. The `MainTask` is responsible for high-level control, while `CalcTask` handles servo angle calculations and PID control for balancing.
 
@@ -7,6 +7,7 @@ This project demonstrates the use of FreeRTOS on an STM32 microcontroller to man
 - **main.h**: Header file containing global definitions and includes.
 - **main.c**: Initialization code for the STM32 peripherals and FreeRTOS scheduler.
 - **PCA9865.c/h**: Code for the servo driver communication.
+- **MPU6050.c/h**: Code for the IMU driver communication.
 - **spid.c/h**: Code for PID control implementation.
 
 ## Tasks Description
@@ -27,10 +28,15 @@ This project demonstrates the use of FreeRTOS on an STM32 microcontroller to man
   - Updates the servo positions based on the calculated values.
 
 ## Usage
-
 1. **Power On**: Connect the STM32 to a power source.
 2. **Initialize**: The system will initialize the peripherals and start the FreeRTOS scheduler.
 3. **Run**: The `MainTask` and `CalcTask` will start executing according to their priorities and scheduling.
+
+## Power Diagram
+![alt text](assets/power_diagram.png)
+
+## Communication Diagram
+![alt text](assets/communication_diagram.png)
 
 ## Troubleshooting
 - **Task Starvation**: Ensure that the priorities of `MainTask` and `CalcTask` are set appropriately to avoid task starvation.
