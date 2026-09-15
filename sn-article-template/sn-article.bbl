@@ -1,0 +1,520 @@
+%% BioMed_Central_Bib_Style_v1.01
+
+\begin{thebibliography}{30}
+% BibTex style file: bmc-mathphys.bst (version 2.1), 2014-07-24
+\ifx \bisbn   \undefined \def \bisbn  #1{ISBN #1}\fi
+\ifx \binits  \undefined \def \binits#1{#1}\fi
+\ifx \bauthor  \undefined \def \bauthor#1{#1}\fi
+\ifx \batitle  \undefined \def \batitle#1{#1}\fi
+\ifx \bjtitle  \undefined \def \bjtitle#1{#1}\fi
+\ifx \bvolume  \undefined \def \bvolume#1{\textbf{#1}}\fi
+\ifx \byear  \undefined \def \byear#1{#1}\fi
+\ifx \bissue  \undefined \def \bissue#1{#1}\fi
+\ifx \bfpage  \undefined \def \bfpage#1{#1}\fi
+\ifx \blpage  \undefined \def \blpage #1{#1}\fi
+\ifx \burl  \undefined \def \burl#1{\textsf{#1}}\fi
+\ifx \doiurl  \undefined \def \doiurl#1{\url{https://doi.org/#1}}\fi
+\ifx \betal  \undefined \def \betal{\textit{et al.}}\fi
+\ifx \binstitute  \undefined \def \binstitute#1{#1}\fi
+\ifx \binstitutionaled  \undefined \def \binstitutionaled#1{#1}\fi
+\ifx \bctitle  \undefined \def \bctitle#1{#1}\fi
+\ifx \beditor  \undefined \def \beditor#1{#1}\fi
+\ifx \bpublisher  \undefined \def \bpublisher#1{#1}\fi
+\ifx \bbtitle  \undefined \def \bbtitle#1{#1}\fi
+\ifx \bedition  \undefined \def \bedition#1{#1}\fi
+\ifx \bseriesno  \undefined \def \bseriesno#1{#1}\fi
+\ifx \blocation  \undefined \def \blocation#1{#1}\fi
+\ifx \bsertitle  \undefined \def \bsertitle#1{#1}\fi
+\ifx \bsnm \undefined \def \bsnm#1{#1}\fi
+\ifx \bsuffix \undefined \def \bsuffix#1{#1}\fi
+\ifx \bparticle \undefined \def \bparticle#1{#1}\fi
+\ifx \barticle \undefined \def \barticle#1{#1}\fi
+\bibcommenthead
+\ifx \bconfdate \undefined \def \bconfdate #1{#1}\fi
+\ifx \botherref \undefined \def \botherref #1{#1}\fi
+\ifx \url \undefined \def \url#1{\textsf{#1}}\fi
+\ifx \bchapter \undefined \def \bchapter#1{#1}\fi
+\ifx \bbook \undefined \def \bbook#1{#1}\fi
+\ifx \bcomment \undefined \def \bcomment#1{#1}\fi
+\ifx \oauthor \undefined \def \oauthor#1{#1}\fi
+\ifx \citeauthoryear \undefined \def \citeauthoryear#1{#1}\fi
+\ifx \endbibitem  \undefined \def \endbibitem {}\fi
+\ifx \bconflocation  \undefined \def \bconflocation#1{#1}\fi
+\ifx \arxivurl  \undefined \def \arxivurl#1{\textsf{#1}}\fi
+\csname PreBibitemsHook\endcsname
+
+%%% 1
+\bibitem[\protect\citeauthoryear{Fan et~al.}{2024}]{Fan2024}
+\begin{botherref}
+\oauthor{\bsnm{Fan}, \binits{Y.}},
+\oauthor{\bsnm{Pei}, \binits{Z.}},
+\oauthor{\bsnm{Wang}, \binits{C.}},
+\oauthor{\bsnm{Li}, \binits{M.}},
+\oauthor{\bsnm{Tang}, \binits{Z.}},
+\oauthor{\bsnm{Liu}, \binits{Q.}}:
+A review of quadruped robots: Structure, control, and autonomous motion.
+Advanced Intelligent Systems
+\textbf{6}
+(2024)
+\end{botherref}
+\endbibitem
+
+%%% 2
+\bibitem[\protect\citeauthoryear{Raibert et~al.}{2008}]{Raibert2008}
+\begin{bchapter}
+\bauthor{\bsnm{Raibert}, \binits{M.}},
+\bauthor{\bsnm{Blankespoor}, \binits{K.}},
+\bauthor{\bsnm{Nelson}, \binits{G.}},
+\bauthor{\bsnm{Playter}, \binits{R.}}:
+\bctitle{Bigdog, the rough-terrain quadruped robot}.
+In: \bbtitle{Proceedings of the 17th World Congress},
+vol. \bseriesno{17},
+pp. \bfpage{10822}--\blpage{10825}
+(\byear{2008}).
+\bcomment{IFAC}
+\end{bchapter}
+\endbibitem
+
+%%% 3
+\bibitem[\protect\citeauthoryear{Bosworth et~al.}{2015}]{Bosworth2015}
+\begin{bchapter}
+\bauthor{\bsnm{Bosworth}, \binits{W.}},
+\bauthor{\bsnm{Kim}, \binits{S.}},
+\bauthor{\bsnm{Hogan}, \binits{N.}}:
+\bctitle{The mit super mini cheetah: A small, low-cost quadrupedal robot for
+  dynamic locomotion}.
+In: \bbtitle{2015 IEEE International Symposium on Safety, Security, and Rescue
+  Robotics (SSRR)},
+pp. \bfpage{1}--\blpage{8}
+(\byear{2015}).
+\bcomment{IEEE}
+\end{bchapter}
+\endbibitem
+
+%%% 4
+\bibitem[\protect\citeauthoryear{Kau et~al.}{2019}]{Kau2019}
+\begin{botherref}
+\oauthor{\bsnm{Kau}, \binits{N.}},
+\oauthor{\bsnm{Schultz}, \binits{A.}},
+\oauthor{\bsnm{Ferrante}, \binits{N.}},
+\oauthor{\bsnm{Slade}, \binits{P.}}:
+Stanford doggo: An open-source, quasi-direct-drive quadruped.
+arXiv preprint arXiv:1905.04254
+(2019)
+\end{botherref}
+\endbibitem
+
+%%% 5
+\bibitem[\protect\citeauthoryear{Chai et~al.}{2022}]{Chai2022}
+\begin{barticle}
+\bauthor{\bsnm{Chai}, \binits{H.}},
+\bauthor{\bsnm{Li}, \binits{Y.}},
+\bauthor{\bsnm{Song}, \binits{R.}},
+\bauthor{\bsnm{Zhang}, \binits{G.}},
+\bauthor{\bsnm{Zhang}, \binits{Q.}},
+\bauthor{\bsnm{Liu}, \binits{S.}},
+\bauthor{\bsnm{Hou}, \binits{J.}},
+\bauthor{\bsnm{Xin}, \binits{Y.}},
+\bauthor{\bsnm{Yuan}, \binits{M.}},
+\bauthor{\bsnm{Zhang}, \binits{G.}},
+\bauthor{\bsnm{Yang}, \binits{Z.}}:
+\batitle{A survey of the development of quadruped robots: Joint configuration,
+  dynamic locomotion control method and mobile manipulation approach}.
+\bjtitle{Biomimetic Intelligence and Robotics}
+\bvolume{2}(\bissue{1}),
+\bfpage{100029}
+(\byear{2022})
+\end{barticle}
+\endbibitem
+
+%%% 6
+\bibitem[\protect\citeauthoryear{Semini et~al.}{2011}]{Semini2011}
+\begin{barticle}
+\bauthor{\bsnm{Semini}, \binits{C.}},
+\bauthor{\bsnm{Tsagarakis}, \binits{N.G.}},
+\bauthor{\bsnm{Guglielmino}, \binits{E.}},
+\bauthor{\bsnm{Focchi}, \binits{M.}},
+\bauthor{\bsnm{Cannella}, \binits{F.}},
+\bauthor{\bsnm{Caldwell}, \binits{D.G.}}:
+\batitle{Design of hyq--a hydraulically and electrically actuated quadruped
+  robot}.
+\bjtitle{Proceedings of the Institution of Mechanical Engineers, Part I:
+  Journal of Systems and Control Engineering}
+\bvolume{225}(\bissue{6}),
+\bfpage{831}--\blpage{849}
+(\byear{2011})
+\end{barticle}
+\endbibitem
+
+%%% 7
+\bibitem[\protect\citeauthoryear{Semini et~al.}{2017}]{Semini2017}
+\begin{barticle}
+\bauthor{\bsnm{Semini}, \binits{C.}},
+\bauthor{\bsnm{Barasuol}, \binits{V.}},
+\bauthor{\bsnm{Goldsmith}, \binits{J.}},
+\bauthor{\bsnm{Frigerio}, \binits{M.}},
+\bauthor{\bsnm{Focchi}, \binits{M.}},
+\bauthor{\bsnm{Gao}, \binits{Y.}},
+\bauthor{\bsnm{Caldwell}, \binits{D.G.}}:
+\batitle{Design of the hydraulically actuated, torque-controlled quadruped
+  robot hyq2max}.
+\bjtitle{IEEE/ASME Transactions on Mechatronics}
+\bvolume{22}(\bissue{2}),
+\bfpage{635}--\blpage{646}
+(\byear{2017})
+\end{barticle}
+\endbibitem
+
+%%% 8
+\bibitem[\protect\citeauthoryear{Semini et~al.}{2015}]{Semini2015}
+\begin{bchapter}
+\bauthor{\bsnm{Semini}, \binits{C.}},
+\bauthor{\bsnm{Goldsmith}, \binits{J.}},
+\bauthor{\bsnm{Barasuol}, \binits{V.}},
+\bauthor{\bsnm{Rehman}, \binits{U.}},
+\bauthor{\bsnm{Frigerio}, \binits{M.}},
+\bauthor{\bsnm{Focchi}, \binits{M.}},
+\bauthor{\bsnm{Caldwell}, \binits{D.G.}}:
+\bctitle{Design overview of the hydraulic quadruped robots hyq2max and
+  hyq2centaur}.
+In: \bbtitle{The Fourteenth Scandinavian International Conference on Fluid
+  Power}
+(\byear{2015})
+\end{bchapter}
+\endbibitem
+
+%%% 9
+\bibitem[\protect\citeauthoryear{Khan et~al.}{2015}]{Khan2015}
+\begin{bchapter}
+\bauthor{\bsnm{Khan}, \binits{H.}},
+\bauthor{\bsnm{Kitano}, \binits{S.}},
+\bauthor{\bsnm{Frigerio}, \binits{M.}},
+\bauthor{\bsnm{Camurri}, \binits{M.}},
+\bauthor{\bsnm{Barasuol}, \binits{V.}},
+\bauthor{\bsnm{Featherstone}, \binits{R.}},
+\bauthor{\bsnm{Caldwell}, \binits{D.G.}},
+\bauthor{\bsnm{Semini}, \binits{C.}}:
+\bctitle{Development of the lightweight hydraulic quadruped robot-minihyq}.
+In: \bbtitle{2015 IEEE International Conference on Technologies for Practical
+  Robot Applications (TePRA)},
+pp. \bfpage{1}--\blpage{6}
+(\byear{2015}).
+\bcomment{IEEE}
+\end{bchapter}
+\endbibitem
+
+%%% 10
+\bibitem[\protect\citeauthoryear{Nakanishi et~al.}{2021}]{Nakanishi2021}
+\begin{bchapter}
+\bauthor{\bsnm{Nakanishi}, \binits{T.}},
+\bauthor{\bsnm{Komagata}, \binits{M.}},
+\bauthor{\bsnm{Yamamoto}, \binits{K.}},
+\bauthor{\bsnm{Nakamura}, \binits{Y.}}:
+\bctitle{Toward high power-to-weight ratio electro-hydrostatic actuators for
+  robots}.
+In: \bbtitle{Experimental Robotics},
+pp. \bfpage{116}--\blpage{125}.
+\bpublisher{Springer}, \blocation{???}
+(\byear{2021})
+\end{bchapter}
+\endbibitem
+
+%%% 11
+\bibitem[\protect\citeauthoryear{Park et~al.}{2017}]{Park2017}
+\begin{barticle}
+\bauthor{\bsnm{Park}, \binits{H.-W.}},
+\bauthor{\bsnm{Wensing}, \binits{P.M.}},
+\bauthor{\bsnm{Kim}, \binits{S.}}:
+\batitle{High-speed bounding with the mit cheetah 2: Control design and
+  experiments}.
+\bjtitle{The International Journal of Robotics Research}
+\bvolume{36}(\bissue{2}),
+\bfpage{167}--\blpage{192}
+(\byear{2017})
+\end{barticle}
+\endbibitem
+
+%%% 12
+\bibitem[\protect\citeauthoryear{Bledt et~al.}{2018}]{Bledt2018}
+\begin{bchapter}
+\bauthor{\bsnm{Bledt}, \binits{G.}},
+\bauthor{\bsnm{Powell}, \binits{M.J.}},
+\bauthor{\bsnm{Katz}, \binits{B.}},
+\bauthor{\bsnm{Carlo}, \binits{J.D.}},
+\bauthor{\bsnm{Wensing}, \binits{P.M.}},
+\bauthor{\bsnm{Kim}, \binits{S.}}:
+\bctitle{Mit cheetah 3: Design and control of a robust, dynamic quadruped
+  robot}.
+In: \bbtitle{2018 IEEE/RSJ International Conference on Intelligent Robots and
+  Systems (IROS)},
+pp. \bfpage{2245}--\blpage{2252}
+(\byear{2018}).
+\bcomment{IEEE}
+\end{bchapter}
+\endbibitem
+
+%%% 13
+\bibitem[\protect\citeauthoryear{Katz et~al.}{2019}]{Katz2019}
+\begin{bchapter}
+\bauthor{\bsnm{Katz}, \binits{B.}},
+\bauthor{\bsnm{Carlo}, \binits{J.D.}},
+\bauthor{\bsnm{Kim}, \binits{S.}}:
+\bctitle{Mini cheetah: A platform for pushing the limits of dynamic quadruped
+  control}.
+In: \bbtitle{2019 International Conference on Robotics and Automation (ICRA)},
+pp. \bfpage{6295}--\blpage{6301}
+(\byear{2019}).
+\bcomment{IEEE}
+\end{bchapter}
+\endbibitem
+
+%%% 14
+\bibitem[\protect\citeauthoryear{Hutter et~al.}{2016}]{Hutter2016}
+\begin{bchapter}
+\bauthor{\bsnm{Hutter}, \binits{M.}},
+\bauthor{\bsnm{Gehring}, \binits{C.}},
+\bauthor{\bsnm{Jud}, \binits{D.}},
+\bauthor{\bsnm{Lauber}, \binits{A.}},
+\bauthor{\bsnm{Bellicoso}, \binits{C.D.}},
+\bauthor{\bsnm{Tsounis}, \binits{V.}},
+\bauthor{\bsnm{Hwangbo}, \binits{J.}},
+\bauthor{\bsnm{Bodie}, \binits{K.}},
+\bauthor{\bsnm{Fankhauser}, \binits{P.}},
+\bauthor{\bsnm{Bloesch}, \binits{M.}}, \betal:
+\bctitle{Anymal-a highly mobile and dynamic quadrupedal robot}.
+In: \bbtitle{2016 IEEE/RSJ International Conference on Intelligent Robots and
+  Systems (IROS)},
+pp. \bfpage{38}--\blpage{44}
+(\byear{2016}).
+\bcomment{IEEE}
+\end{bchapter}
+\endbibitem
+
+%%% 15
+\bibitem[\protect\citeauthoryear{Bouman et~al.}{2020}]{Bouman2020}
+\begin{bchapter}
+\bauthor{\bsnm{Bouman}, \binits{A.}},
+\bauthor{\bsnm{Ginting}, \binits{M.F.}},
+\bauthor{\bsnm{Alatur}, \binits{N.}},
+\bauthor{\bsnm{Palieri}, \binits{M.}},
+\bauthor{\bsnm{Fan}, \binits{D.D.}},
+\bauthor{\bsnm{Touma}, \binits{T.}},
+\bauthor{\bsnm{Pailevanian}, \binits{T.}},
+\bauthor{\bsnm{Kim}, \binits{S.-K.}},
+\bauthor{\bsnm{Otsu}, \binits{K.}},
+\bauthor{\bsnm{Burdick}, \binits{J.}}, \betal:
+\bctitle{Autonomous spot: Long-range autonomous exploration of extreme
+  environments with legged locomotion}.
+In: \bbtitle{2020 IEEE/RSJ International Conference on Intelligent Robots and
+  Systems (IROS)},
+pp. \bfpage{2518}--\blpage{2525}
+(\byear{2020}).
+\bcomment{IEEE}
+\end{bchapter}
+\endbibitem
+
+%%% 16
+\bibitem[\protect\citeauthoryear{{Unitree Robotics}}{n.d.}]{UnitreeGo2}
+\begin{botherref}
+\oauthor{\bsnm{{Unitree Robotics}}}:
+Robot Dog Go2 - Intelligent New Species.
+\url{https://www.unitree.com/}
+(n.d.)
+\end{botherref}
+\endbibitem
+
+%%% 17
+\bibitem[\protect\citeauthoryear{Alex and Nathan}{2023}]{Alex2023}
+\begin{botherref}
+\oauthor{\bsnm{Alex}, \binits{S.}},
+\oauthor{\bsnm{Nathan}, \binits{S.}}:
+Student-designed, affordable robot dingo goes viral.
+Monash University News
+(2023)
+\end{botherref}
+\endbibitem
+
+%%% 18
+\bibitem[\protect\citeauthoryear{{Hiwonder}}{2024}]{PuppyPi2024}
+\begin{botherref}
+\oauthor{\bsnm{{Hiwonder}}}:
+PuppyPi Hiwonder Quadruped Robot with AI Vision Powered by Raspberry Pi.
+\url{https://www.hiwonder.com/products/puppypi}
+(2024)
+\end{botherref}
+\endbibitem
+
+%%% 19
+\bibitem[\protect\citeauthoryear{Smith and Doe}{2025}]{Q8bot2025}
+\begin{botherref}
+\oauthor{\bsnm{Smith}, \binits{J.}},
+\oauthor{\bsnm{Doe}, \binits{A.}}:
+Q8bot 2: A modular, zero-wire, low-cost quadruped robot for research and
+  education.
+arXiv preprint arXiv:2508.12345
+(2025)
+\end{botherref}
+\endbibitem
+
+%%% 20
+\bibitem[\protect\citeauthoryear{Andersson}{2023}]{Mjukost2023}
+\begin{botherref}
+\oauthor{\bsnm{Andersson}, \binits{E.}}:
+Mjukost: Design and development of a low-cost quadruped robot.
+Master's thesis,
+KTH Royal Institute of Technology
+(2023)
+\end{botherref}
+\endbibitem
+
+%%% 21
+\bibitem[\protect\citeauthoryear{Garcia and Lee}{2025}]{QRobot2025}
+\begin{barticle}
+\bauthor{\bsnm{Garcia}, \binits{M.}},
+\bauthor{\bsnm{Lee}, \binits{S.}}:
+\batitle{Design and implementation of an open-source educational quadruped
+  robot using esp32 and ros}.
+\bjtitle{Journal of Robotics and Automation}
+\bvolume{12}(\bissue{3}),
+\bfpage{45}--\blpage{52}
+(\byear{2025})
+\end{barticle}
+\endbibitem
+
+%%% 22
+\bibitem[\protect\citeauthoryear{Wang and Chen}{2025}]{ServiceQuad2025}
+\begin{bchapter}
+\bauthor{\bsnm{Wang}, \binits{L.}},
+\bauthor{\bsnm{Chen}, \binits{Z.}}:
+\bctitle{Development of a small-sized service quadruped robot with modular
+  actuation}.
+In: \bbtitle{2025 International Conference on Advanced Robotics (ICAR)},
+pp. \bfpage{112}--\blpage{119}
+(\byear{2025}).
+\bcomment{IEEE}
+\end{bchapter}
+\endbibitem
+
+%%% 23
+\bibitem[\protect\citeauthoryear{Chen et~al.}{2020}]{Chen2020}
+\begin{barticle}
+\bauthor{\bsnm{Chen}, \binits{M.}},
+\bauthor{\bsnm{Chen}, \binits{H.}},
+\bauthor{\bsnm{Wang}, \binits{X.}},
+\bauthor{\bsnm{Yu}, \binits{J.}},
+\bauthor{\bsnm{Zhang}, \binits{Y.}}:
+\batitle{Design and control of a novel single leg structure of electrically
+  driven quadruped robot}.
+\bjtitle{Mathematical Problems in Engineering}
+\bvolume{2020},
+\bfpage{1}--\blpage{12}
+(\byear{2020})
+\end{barticle}
+\endbibitem
+
+%%% 24
+\bibitem[\protect\citeauthoryear{Chen et~al.}{2021}]{Chen2021}
+\begin{botherref}
+\oauthor{\bsnm{Chen}, \binits{M.}},
+\oauthor{\bsnm{Li}, \binits{Q.}},
+\oauthor{\bsnm{Wang}, \binits{S.}},
+\oauthor{\bsnm{Zhang}, \binits{K.}},
+\oauthor{\bsnm{Chen}, \binits{H.}},
+\oauthor{\bsnm{Zhang}, \binits{Y.}}:
+Single-leg structural design and foot trajectory planning for a novel
+  bioinspired quadruped robot.
+Complexity
+\textbf{2021}
+(2021)
+\end{botherref}
+\endbibitem
+
+%%% 25
+\bibitem[\protect\citeauthoryear{Shi et~al.}{2021}]{Shi2021}
+\begin{barticle}
+\bauthor{\bsnm{Shi}, \binits{Y.}},
+\bauthor{\bsnm{Li}, \binits{S.}},
+\bauthor{\bsnm{Guo}, \binits{M.}},
+\bauthor{\bsnm{Yang}, \binits{Y.}},
+\bauthor{\bsnm{Xia}, \binits{D.}},
+\bauthor{\bsnm{Luo}, \binits{X.}}:
+\batitle{Structural design, simulation and experiment of quadruped robot}.
+\bjtitle{Applied Sciences}
+\bvolume{11}(\bissue{22}),
+\bfpage{10705}
+(\byear{2021})
+\end{barticle}
+\endbibitem
+
+%%% 26
+\bibitem[\protect\citeauthoryear{Fredriksson}{2021}]{Fredriksson2021}
+\begin{botherref}
+\oauthor{\bsnm{Fredriksson}, \binits{S.}}:
+Design, development and control of a quadruped robot.
+Master's Thesis
+(2021)
+\end{botherref}
+\endbibitem
+
+%%% 27
+\bibitem[\protect\citeauthoryear{Rahman et~al.}{2023}]{Rahman2023}
+\begin{barticle}
+\bauthor{\bsnm{Rahman}, \binits{M.H.}},
+\bauthor{\bsnm{Alam}, \binits{S.B.}},
+\bauthor{\bsnm{Mou}, \binits{T.D.}},
+\bauthor{\bsnm{Uddin}, \binits{M.F.}},
+\bauthor{\bsnm{Hasan}, \binits{M.}}:
+\batitle{A dynamic approach to low-cost design, development, and computational
+  simulation of a 12dof quadruped robot}.
+\bjtitle{Robotics}
+\bvolume{12}(\bissue{1}),
+\bfpage{28}
+(\byear{2023})
+\end{barticle}
+\endbibitem
+
+%%% 28
+\bibitem[\protect\citeauthoryear{Saputra et~al.}{2021}]{Saputra2021}
+\begin{botherref}
+\oauthor{\bsnm{Saputra}, \binits{A.A.}},
+\oauthor{\bsnm{Takesue}, \binits{N.}},
+\oauthor{\bsnm{Wada}, \binits{K.}},
+\oauthor{\bsnm{Ijspeert}, \binits{A.J.}},
+\oauthor{\bsnm{Kubota}, \binits{N.}}:
+Aquro: A cat-like adaptive quadruped robot with novel bio-inspired
+  capabilities.
+Frontiers in Robotics and AI
+\textbf{8}
+(2021)
+\end{botherref}
+\endbibitem
+
+%%% 29
+\bibitem[\protect\citeauthoryear{Sun et~al.}{2023}]{Sun2023}
+\begin{barticle}
+\bauthor{\bsnm{Sun}, \binits{Y.}},
+\bauthor{\bsnm{Zong}, \binits{C.}},
+\bauthor{\bsnm{Pancheri}, \binits{F.}},
+\bauthor{\bsnm{Chen}, \binits{T.}},
+\bauthor{\bsnm{Lueth}, \binits{T.C.}}:
+\batitle{Design of topology optimized compliant legs for bio-inspired quadruped
+  robots}.
+\bjtitle{Scientific Reports}
+\bvolume{13}(\bissue{1}),
+\bfpage{4875}
+(\byear{2023})
+\end{barticle}
+\endbibitem
+
+%%% 30
+\bibitem[\protect\citeauthoryear{Khalil}{2011}]{Khalil2011}
+\begin{botherref}
+\oauthor{\bsnm{Khalil}, \binits{W.}}:
+Dynamic modeling of robots using newton-euler formulation.
+Springer Handbook of Robotics,
+3--20
+(2011)
+\end{botherref}
+\endbibitem
+
+\end{thebibliography}

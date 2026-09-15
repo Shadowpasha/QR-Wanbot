@@ -40,6 +40,7 @@ extern "C" {
 #include "stdio.h"
 #include "stdlib.h"
 #include "usart.h"
+#include "adc.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -49,15 +50,15 @@ extern "C" {
 
 /* Exported constants --------------------------------------------------------*/
 /* USER CODE BEGIN EC */
-#define Y_offset 0.05  //0.05
-#define X_offset 0.00  // 0.02
+#define Y_offset 0.00  //0.02
+#define X_offset -0.001  // -0.022
 #define upper_leg_len 0.13
 #define lower_leg_len 0.115
 #define body_width 0.1
 #define body_length 0.15
-#define hind_lef_offest 0.02  //0.01
-#define smoothing_var 0.1
-#define balance_offset 0.013  //0.013
+#define hind_leg_offest 0.035 //0.055
+#define smoothing_var 1.0
+#define balance_offset 0.000
 /* USER CODE END EC */
 
 /* Exported macro ------------------------------------------------------------*/
@@ -115,13 +116,21 @@ void Error_Handler(void);
 
 void inverse_leg_kinematics(float position[], float angles[], uint8_t leg_index, float rotation[]);
 void adjust_servo_angles(float angles[], uint8_t leg_index);
-void inverse_kinematics_all(float FL_position[], float FR_position[], float BL_position[], float BR_position[], float FL_rotation[], float FR_rotation[], float BL_rotation[], float BR_rotation[]);
+void inverse_kinematics_all(void);
 void load_angles();
-void Gait_controller (uint8_t ticks, float x_setpoint, float y_setpoint);
+void Gait_controller (uint32_t ticks, float x_setpoint, float y_setpoint, float turn_setpoint);
 int angle_to_pulse(float angle);
+void leg_cycle(float positions[], uint8_t leg, uint8_t mode, uint32_t ticks, float x_setpoint, float y_setpoint, float angles[], float p, float r, float yaw);
 void Stand();
+float generate_linear_xy_trajectory(float min, float max, float interpolation);
+float generate_cubic_z_trajectory(float t);
+float generate_step_z_trajectory(float t, float max_height);
+float generate_smooth_xy_trajectory(float min, float max, float t);
+float generate_smooth_z_trajectory(float t, float height);
 void Rise();
 void HiWave();
+void Scratch();
+void Step_Forward();
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

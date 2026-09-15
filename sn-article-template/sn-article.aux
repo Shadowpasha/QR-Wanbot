@@ -1,0 +1,123 @@
+\relax 
+\bibstyle{sn-mathphys-num}
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{Fan2024}
+\Newlabel{1}{1}
+\citation{Raibert2008}
+\citation{Bosworth2015}
+\citation{Kau2019}
+\citation{Fan2024,Chai2022}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}\protected@file@percent }
+\newlabel{sec1}{{1}{2}{Introduction}{section.1}{}}
+\citation{Raibert2008}
+\citation{Semini2011,Semini2017}
+\citation{Semini2015}
+\citation{Khan2015}
+\citation{Nakanishi2021}
+\citation{Park2017}
+\citation{Bledt2018}
+\citation{Katz2019}
+\citation{Bosworth2015}
+\citation{Hutter2016}
+\citation{Bouman2020}
+\citation{UnitreeGo2}
+\citation{Kau2019}
+\citation{Alex2023}
+\citation{PuppyPi2024}
+\citation{Q8bot2025}
+\citation{Mjukost2023}
+\citation{QRobot2025}
+\citation{ServiceQuad2025}
+\citation{Chen2020,Chen2021}
+\citation{Shi2021,Fredriksson2021}
+\citation{Rahman2023}
+\citation{Saputra2021}
+\citation{Sun2023}
+\citation{Khalil2011}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{3}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{2}{3}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Hydraulic Quadrupeds}{3}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Brushless Electric Quadrupeds}{3}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Servo-Based and Low-Cost Designs}{3}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Mechanical Design and Analysis}{4}{section.3}\protected@file@percent }
+\newlabel{sec2}{{3}{4}{Mechanical Design and Analysis}{section.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces System Hardware Architecture: The STM32F411 central controller interfaces with the MPU6050 IMU for state estimation and the PCA9685 driver for actuator control. High-voltage servos are powered directly from the LiPo source, and FSRs monitor ground contact.}}{4}{figure.caption.2}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:hardware}{{1}{4}{System Hardware Architecture: The STM32F411 central controller interfaces with the MPU6050 IMU for state estimation and the PCA9685 driver for actuator control. High-voltage servos are powered directly from the LiPo source, and FSRs monitor ground contact}{figure.caption.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Isometric view of the QR-Wanbot CAD model, showing the component layout.}}{5}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:iso_view}{{2}{5}{Isometric view of the QR-Wanbot CAD model, showing the component layout}{figure.caption.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Control System Architecture}{5}{section.4}\protected@file@percent }
+\newlabel{sec3}{{4}{5}{Control System Architecture}{section.4}{}}
+\newlabel{fig:side_view}{{3a}{6}{Side View}{figure.caption.4}{}}
+\newlabel{sub@fig:side_view}{{a}{6}{Side View}{figure.caption.4}{}}
+\newlabel{fig:top_view}{{3b}{6}{Top View}{figure.caption.4}{}}
+\newlabel{sub@fig:top_view}{{b}{6}{Top View}{figure.caption.4}{}}
+\newlabel{fig:back_view}{{3c}{6}{Back View}{figure.caption.4}{}}
+\newlabel{sub@fig:back_view}{{c}{6}{Back View}{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Design views of the QR-Wanbot: (a) Side View, (b) Top View, and (c) Back View.}}{6}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:ortho_views}{{3}{6}{Design views of the QR-Wanbot: (a) Side View, (b) Top View, and (c) Back View}{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Software Control Architecture: Data flow between the low-frequency MainTask (Gait Logic) and the high-frequency CalcTask (Real-time Control). Sensor fusion and Inverse Kinematics occur within the strict 50Hz scheduling loop to ensure stable motion.}}{6}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:software}{{4}{6}{Software Control Architecture: Data flow between the low-frequency MainTask (Gait Logic) and the high-frequency CalcTask (Real-time Control). Sensor fusion and Inverse Kinematics occur within the strict 50Hz scheduling loop to ensure stable motion}{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Trot Gait Finite State Machine (FSM): A detailed view of the Trot lifecycle. The system initializes, calibrates sensors, and enters a Standby state. Upon joystick input, it enters the Trot loop, alternating between diagonal pair swing phases (Phase A and Phase B) to generate forward motion.}}{7}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:fsm}{{5}{7}{Trot Gait Finite State Machine (FSM): A detailed view of the Trot lifecycle. The system initializes, calibrates sensors, and enters a Standby state. Upon joystick input, it enters the Trot loop, alternating between diagonal pair swing phases (Phase A and Phase B) to generate forward motion}{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Mathematical Formulation}{7}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}Inverse Kinematics (IK) Derivation}{7}{subsubsection.4.1.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Gait Trajectory Generation}{9}{subsubsection.4.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3}Signal Smoothing}{9}{subsubsection.4.1.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5}Experimental Results}{9}{section.5}\protected@file@percent }
+\newlabel{sec4}{{5}{9}{Experimental Results}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Locomotion Analysis}{10}{subsection.5.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Robot deviation from a straight path during locomotion.}}{10}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:deviation}{{6}{10}{Robot deviation from a straight path during locomotion}{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Experimental setup for the locomotion analysis tests.}}{10}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:locomotion_test}{{7}{10}{Experimental setup for the locomotion analysis tests}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Stability Analysis}{10}{subsection.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces IMU Pitch and Roll response, demonstrating active stabilization.}}{11}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:imu_graph}{{8}{11}{IMU Pitch and Roll response, demonstrating active stabilization}{figure.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Experimental setup for the stability analysis tests.}}{11}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:stability_analysis}{{9}{11}{Experimental setup for the stability analysis tests}{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Power Consumption and Efficiency}{11}{subsection.5.3}\protected@file@percent }
+\newlabel{eq:cot}{{17}{11}{Power Consumption and Efficiency}{equation.17}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Discussion}{12}{section.6}\protected@file@percent }
+\newlabel{sec5}{{6}{12}{Discussion}{section.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Conclusion}{12}{section.7}\protected@file@percent }
+\newlabel{sec6}{{7}{12}{Conclusion}{section.7}{}}
+\@writefile{toc}{\contentsline {subparagraph}{Acknowledgements}{12}{section*.11}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {A}Gait Controller Logic}{12}{appendix.1.A}\protected@file@percent }
+\newlabel{secA2}{{A}{12}{Gait Controller Logic}{appendix.1.A}{}}
+\bibdata{sn-bibliography}
+\bibcite{Fan2024}{{1}{2024}{{Fan et~al.}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Main Control Loop (CalcTask)}{13}{appendix.1.B}\protected@file@percent }
+\newlabel{secA4}{{B}{13}{Main Control Loop (CalcTask)}{appendix.1.B}{}}
+\bibcite{Raibert2008}{{2}{2008}{{Raibert et~al.}}{{}}}
+\bibcite{Bosworth2015}{{3}{2015}{{Bosworth et~al.}}{{}}}
+\bibcite{Kau2019}{{4}{2019}{{Kau et~al.}}{{}}}
+\bibcite{Chai2022}{{5}{2022}{{Chai et~al.}}{{}}}
+\bibcite{Semini2011}{{6}{2011}{{Semini et~al.}}{{}}}
+\bibcite{Semini2017}{{7}{2017}{{Semini et~al.}}{{}}}
+\bibcite{Semini2015}{{8}{2015}{{Semini et~al.}}{{}}}
+\bibcite{Khan2015}{{9}{2015}{{Khan et~al.}}{{}}}
+\bibcite{Nakanishi2021}{{10}{2021}{{Nakanishi et~al.}}{{}}}
+\bibcite{Park2017}{{11}{2017}{{Park et~al.}}{{}}}
+\bibcite{Bledt2018}{{12}{2018}{{Bledt et~al.}}{{}}}
+\bibcite{Katz2019}{{13}{2019}{{Katz et~al.}}{{}}}
+\bibcite{Hutter2016}{{14}{2016}{{Hutter et~al.}}{{}}}
+\bibcite{Bouman2020}{{15}{2020}{{Bouman et~al.}}{{}}}
+\bibcite{UnitreeGo2}{{16}{n.d.}{{{Unitree Robotics}}}{{}}}
+\bibcite{Alex2023}{{17}{2023}{{Alex and Nathan}}{{}}}
+\bibcite{PuppyPi2024}{{18}{2024}{{{Hiwonder}}}{{}}}
+\bibcite{Q8bot2025}{{19}{2025}{{Smith and Doe}}{{}}}
+\bibcite{Mjukost2023}{{20}{2023}{{Andersson}}{{}}}
+\bibcite{QRobot2025}{{21}{2025}{{Garcia and Lee}}{{}}}
+\bibcite{ServiceQuad2025}{{22}{2025}{{Wang and Chen}}{{}}}
+\bibcite{Chen2020}{{23}{2020}{{Chen et~al.}}{{}}}
+\bibcite{Chen2021}{{24}{2021}{{Chen et~al.}}{{}}}
+\bibcite{Shi2021}{{25}{2021}{{Shi et~al.}}{{}}}
+\bibcite{Fredriksson2021}{{26}{2021}{{Fredriksson}}{{}}}
+\bibcite{Rahman2023}{{27}{2023}{{Rahman et~al.}}{{}}}
+\bibcite{Saputra2021}{{28}{2021}{{Saputra et~al.}}{{}}}
+\bibcite{Sun2023}{{29}{2023}{{Sun et~al.}}{{}}}
+\bibcite{Khalil2011}{{30}{2011}{{Khalil}}{{}}}
+\gdef \@abspage@last{16}
